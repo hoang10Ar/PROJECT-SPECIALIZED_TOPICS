@@ -26,7 +26,7 @@
   5. The Client-side service discovery pattern:
     - Introducing how to implement the "Client-side service
       discovery" pattern with the Netflix Eureka project.
-  -- 
+  --- 
   6. The Circuit Breaker pattern:
     - Introducing how to implement the "Circuit Breaker" pattern with 
       the Resilience4j library.
