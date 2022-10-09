@@ -1,0 +1,29 @@
+server:
+  port: 8080
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        # Server 1 Route
+        - id: Server-1
+          uri: http://localhost:8081
+          predicates:     # I use the Path predicate
+          - Path=/ser1/**
+
+        # Server 2 Route
+        - id: Server-2
+          uri: http://localhost:8082
+          predicates:     # I use the Path predicate
+            - Path=/ser2/**
+
+#     When the GatewayService service receives a request
+# with the content of the path is “/ser1/**”, it forwards
+# the request to the address http://localhost:8081 (the
+# address of the Server1Service service) and keeps the
+# contents of the path unchanged.
+#     When the GatewayService service receives a request
+# with the content of the path is “/ser2/**”, it forwards
+# the request to the address http://localhost:8082 (the
+# address of the Server2Service service) and keeps the
+# contents of the path unchanged.

@@ -1,0 +1,31 @@
+server:
+  port: 8080
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      cirBreakerHome:
+        slidingWindowType: COUNT_BASED
+        slidingWindowSize: 10
+        minimumNumberOfCalls: 5
+        failureRateThreshold: 50
+        waitDurationInOpenState: 20s
+        permittedNumberOfCallsInHalfOpenState: 3
+
+#     With the above configuration information, the circuit breaker
+# will use the responses received from the 10 most recent requests
+# sent to calculate the failure rate. If you have not sent more than
+# 10 requests at the moment, the circuit breaker only calculates the
+# failure rate after sending at least 5 requests. If the failure
+# rate of the last 10 requests at some point is greater than 50
+# percent, the circuit breaker will switch to the Open state for 20
+# seconds and refuse any requests sent to the failed service. After
+# 20 seconds, the circuit breaker will switch to the Half-open state.
+# In the Half-open state, the circuit breaker allows sending only up
+# to 3 requests. After sending 3 requests to the failed service in
+# the Half-open state, the circuit breaker will calculate the failure
+# rate. If the failure rate of 3 requests less than 50 percent, the
+# circuit breaker will switch to the Closed state and start tracking
+# new requests after the last Half-open state, otherwise it will
+# switch to the Open state again and stay in the Open state for 20
+# seconds before switch back to the Half-open state.
